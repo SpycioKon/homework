@@ -1,0 +1,23 @@
+< THE SYMBOL TABLE >  sum.exe  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+STACK                    	00000     	-5        	SEGMENT   	(ITSELF)  
+DATA                     	00010     	-5        	SEGMENT   	(ITSELF)  
+SO1                      	00000     	2         	VAR       	data      
+SO2                      	00002     	2         	VAR       	data      
+TBAO1                    	00004     	1         	VAR       	data      
+TBAO2                    	00019     	1         	VAR       	data      
+TBAO3                    	0002E     	1         	VAR       	data      
+CODE                     	00014     	-5        	SEGMENT   	(ITSELF)  
+MAIN                     	00000     	-1        	NEAR      	code      
+NHAP_1                   	00012     	-1        	LABEL     	code      
+TB_2                     	00023     	-1        	LABEL     	code      
+NHAP_2                   	00040     	-1        	LABEL     	code      
+TB_3                     	00051     	-1        	LABEL     	code      
+TONG                     	0006A     	-1        	LABEL     	code      
+LAP3                     	0007F     	-1        	LABEL     	code      
+===================================================================================================
+[ 11/02/2025  --  3:25:41 SA ] 
+< END >
+ 

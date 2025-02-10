@@ -1,0 +1,100 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+nhi.exe -- emu8086 assembler version: 4.08  
+ 
+[ 11/02/2025  --  3:24:02 SA ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       .model small
+[   2]        :                                       .stack 100h
+[   3]        :                                       .data
+[   4]    0100: 4E 68 61 70 20 63 68 75 6F 69 20 64   tbao db "Nhap chuoi di: $"
+                69 3A 20 24                         
+[   5]    0110: 43 68 75 6F 69 20 64 61 20 63 68 75   tbao1 db "Chuoi da chuyen doi: $"
+                79 65 6E 20 64 6F 69 3A 20 24       
+[   6]        :                                       .code
+[   7]        :                                       
+[   8]    0130:                                       main proc
+[   9]    0130: B8 10 00                              mov ax,@data
+[  10]    0133: 8E D8                                 mov ds,ax
+[  11]        :                                       
+[  12]    0135: B4 09                                 mov ah,9
+[  13]    0137: BA 00 00                              lea dx,tbao
+[  14]    013A: CD 21                                 int 21h
+[  15]        :                                       
+[  16]    013C: 33 C9                                 xor cx,cx
+[  17]    013E: B4 01                                 mov ah,1
+[  18]    0140: CD 21                                 int 21h
+[  19]    0142:                                       while_:
+[  20]    0142: 3C 0D                                 cmp al,0Dh
+[  21]    0144: 74 06                                 je end_
+[  22]    0146: 50                                    push ax
+[  23]    0147: 41                                    inc cx
+[  24]    0148: CD 21                                 int 21h
+[  25]    014A: EB F6                                 jmp while_
+[  26]    014C:                                       end_:
+[  27]    014C: B4 02                                 mov ah,2
+[  28]    014E: B2 0D                                 mov dl,0dh
+[  29]    0150: CD 21                                 int 21h
+[  30]    0152: B4 02                                 mov ah,2
+[  31]    0154: B2 0A                                 mov dl,0ah
+[  32]    0156: CD 21                                 int 21h
+[  33]    0158: B4 09                                 mov ah,9
+[  34]    015A: BA 10 00                              lea dx,tbao1
+[  35]    015D: CD 21                                 int 21h
+[  36]    015F:                                       loop_:
+[  37]    015F: 5A                                    pop dx
+[  38]    0160: B4 02                                 mov ah,2
+[  39]    0162: CD 21                                 int 21h
+[  40]    0164: E2 F9                                 loop loop_
+[  41]        :                                       main endp
+[  42]        :                                       end main
+[  43]        :                                       
+ 
+===================================================================================================
+ 
+EXE HEADER - bytes from 0000 to 01FF inclusive.
+
+0000: 4D      -   exe signature (M)
+0001: 5A      -   exe signature (Z)
+0002: 66      -   bytes on last page (l.byte)
+0003: 01      -   bytes on last page (h.byte)
+0004: 02      -   512 byte pages in file (l.byte)
+0005: 00      -   512 byte pages in file (h.byte)
+0006: 01      -   relocations (l.byte)
+0007: 00      -   relocations (h.byte)
+0008: 20      -   paragraphs in header (l.byte)
+0009: 00      -   paragraphs in header (h.byte)
+000A: 00      -   minimum memory (l.byte)
+000B: 00      -   minimum memory (h.byte)
+000C: FF      -   maximum memory (l.byte)
+000D: FF      -   maximum memory (h.byte)
+000E: 00      -   SS - stack segment (l.byte)
+000F: 00      -   SS - stack segment (h.byte)
+0010: 00      -   SP - stack pointer (l.byte)
+0011: 01      -   SP - stack pointer (h.byte)
+0012: 8A      -   check sum (l.byte)
+0013: CA      -   check sum (h.byte)
+0014: 00      -   IP - instruction pointer (l.byte)
+0015: 00      -   IP - instruction pointer (h.byte)
+0016: 13      -   CS - code segment (l.byte)
+0017: 00      -   CS - code segment (h.byte)
+0018: 1E      -   relocation table adress (l.byte)
+0019: 00      -   relocation table adress (h.byte)
+001A: 00      -   overlay number (l.byte)
+001B: 00      -   overlay number (h.byte)
+001C: 01      -   signature (l.byte)
+001D: 00      -   signature (h.byte)
+001E: 01      -   relocation table - offset inside segment (l.byte)
+001F: 00      -   relocation table - offset inside segment (h.byte)
+0020: 13      -   relocation table - segment anchor (l.byte)
+0021: 00      -   relocation table - segment anchor (h.byte)
+0022 to 01FF  -   reserved relocation area  (00) 
+
+
+
+
+===================================================================================================

@@ -1,0 +1,141 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+sum.exe -- emu8086 assembler version: 4.08  
+ 
+[ 11/02/2025  --  3:26:54 SA ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       .model small
+[   2]        :                                       .stack 100h
+[   3]        :                                       .data
+[   4]    0100: 4E 68 61 70 20 73 6F 20 74 68 75 20   tb1 db 'Nhap so thu nhat: $'
+                6E 68 61 74 3A 20 24                
+[   5]    0113: 0D 0A 6E 68 61 70 20 73 6F 20 74 68   tb2 db 13,10, 'nhap so thu 2: $'
+                75 20 32 3A 20 24                   
+[   6]    0125: 0D 0A 74 6F 6E 67 20 63 61 20 68 61   tb3 db 13,10,'tong ca hai la: $'
+                69 20 6C 61 3A 20 24                
+[   7]    0138: 00 00                                 so1 dw 0
+[   8]    013A: 00 00                                 so2 dw 0
+[   9]    013C: 00 00                                 tong dw 0
+[  10]        :                                       .code
+[  11]    0140:                                       main proc
+[  12]    0140: B8 10 00                              mov ax,@data
+[  13]    0143: 8E D8                                 mov ds,ax
+[  14]    0145: BA 00 00                              lea dx,tb1
+[  15]    0148: B4 09                                 mov ah,9
+[  16]    014A: CD 21                                 int 21h
+[  17]    014C:                                       nhap1:
+[  18]    014C: B4 01                                 mov ah,1
+[  19]    014E: CD 21                                 int 21h
+[  20]    0150: 3C 0D                                 cmp al,13
+[  21]    0152: 74 15                                 je nhap2
+[  22]    0154: 2C 30                                 sub al,30h
+[  23]    0156: B4 00                                 mov ah,0
+[  24]    0158: 8B C8                                 mov cx,ax
+[  25]    015A: A1 38 00                              mov ax,so1
+[  26]    015D: BB 0A 00                              mov bx,10
+[  27]    0160: F7 E3                                 mul bx
+[  28]    0162: 03 C1                                 add ax,cx
+[  29]    0164: A3 38 00                              mov so1,ax
+[  30]    0167: EB E3                                 jmp nhap1
+[  31]    0169:                                       nhap2:
+[  32]    0169: BA 13 00                              lea dx,tb2
+[  33]    016C: B4 09                                 mov ah,9
+[  34]    016E: CD 21                                 int 21h
+[  35]    0170:                                       nhap:
+[  36]    0170: B4 01                                 mov ah,1
+[  37]    0172: CD 21                                 int 21h
+[  38]    0174: 3C 0D                                 cmp al,13
+[  39]    0176: 74 15                                 je tinhtong
+[  40]    0178: 2C 30                                 sub al,30h
+[  41]    017A: B4 00                                 mov ah,0
+[  42]    017C: 8B C8                                 mov cx,ax
+[  43]    017E: A1 3A 00                              mov ax,so2
+[  44]    0181: BB 0A 00                              mov bx,10
+[  45]    0184: F7 E3                                 mul bx
+[  46]    0186: 03 C1                                 add ax,cx
+[  47]    0188: A3 3A 00                              mov so2,ax
+[  48]    018B: EB E3                                 jmp nhap
+[  49]    018D:                                       tinhtong:
+[  50]    018D: 8B 16 3C 00                           mov dx,tong
+[  51]    0191: A1 38 00                              mov ax,so1
+[  52]    0194: 8B 1E 3A 00                           mov bx,so2
+[  53]    0198: 03 C3                                 add ax,bx
+[  54]    019A: A3 3C 00                              mov tong,ax
+[  55]    019D:                                       inso:
+[  56]    019D: B4 09                                 mov ah,9
+[  57]    019F: BA 25 00                              lea dx,tb3
+[  58]    01A2: CD 21                                 int 21h
+[  59]    01A4: A1 3C 00                              mov ax,tong
+[  60]    01A7: BA 00 00                              mov dx,0
+[  61]    01AA: BB 0A 00                              mov bx,10
+[  62]    01AD: B9 00 00                              mov cx,0
+[  63]    01B0:                                       chia:
+[  64]    01B0: F7 F3                                 div bx
+[  65]    01B2: 52                                    push dx
+[  66]    01B3: 41                                    inc cx
+[  67]    01B4: 3D 00 00                              cmp ax,0
+[  68]    01B7: 74 04                                 je hienkq
+[  69]    01B9: 33 D2                                 xor dx,dx
+[  70]    01BB: EB F3                                 jmp chia
+[  71]    01BD:                                       hienkq:
+[  72]    01BD: 5A                                    pop dx
+[  73]    01BE: 80 C2 30                              add dl,30h
+[  74]    01C1: B4 02                                 mov ah,2
+[  75]    01C3: CD 21                                 int 21h
+[  76]    01C5: E2 F6                                 loop hienkq
+[  77]    01C7:                                       ra:
+[  78]    01C7: B4 4C                                 mov ah,4ch
+[  79]    01C9: CD 21                                 int 21h
+[  80]        :                                       main endp
+[  81]        :                                       
+[  82]        :                                       end main
+[  83]        :                                       
+ 
+===================================================================================================
+ 
+EXE HEADER - bytes from 0000 to 01FF inclusive.
+
+0000: 4D      -   exe signature (M)
+0001: 5A      -   exe signature (Z)
+0002: CB      -   bytes on last page (l.byte)
+0003: 01      -   bytes on last page (h.byte)
+0004: 02      -   512 byte pages in file (l.byte)
+0005: 00      -   512 byte pages in file (h.byte)
+0006: 01      -   relocations (l.byte)
+0007: 00      -   relocations (h.byte)
+0008: 20      -   paragraphs in header (l.byte)
+0009: 00      -   paragraphs in header (h.byte)
+000A: 00      -   minimum memory (l.byte)
+000B: 00      -   minimum memory (h.byte)
+000C: FF      -   maximum memory (l.byte)
+000D: FF      -   maximum memory (h.byte)
+000E: 00      -   SS - stack segment (l.byte)
+000F: 00      -   SS - stack segment (h.byte)
+0010: 00      -   SP - stack pointer (l.byte)
+0011: 01      -   SP - stack pointer (h.byte)
+0012: A1      -   check sum (l.byte)
+0013: CB      -   check sum (h.byte)
+0014: 00      -   IP - instruction pointer (l.byte)
+0015: 00      -   IP - instruction pointer (h.byte)
+0016: 14      -   CS - code segment (l.byte)
+0017: 00      -   CS - code segment (h.byte)
+0018: 1E      -   relocation table adress (l.byte)
+0019: 00      -   relocation table adress (h.byte)
+001A: 00      -   overlay number (l.byte)
+001B: 00      -   overlay number (h.byte)
+001C: 01      -   signature (l.byte)
+001D: 00      -   signature (h.byte)
+001E: 01      -   relocation table - offset inside segment (l.byte)
+001F: 00      -   relocation table - offset inside segment (h.byte)
+0020: 14      -   relocation table - segment anchor (l.byte)
+0021: 00      -   relocation table - segment anchor (h.byte)
+0022 to 01FF  -   reserved relocation area  (00) 
+
+
+
+
+===================================================================================================
