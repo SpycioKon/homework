@@ -1,0 +1,84 @@
+;bai tap 1
+;======================
+;BAI TAP 1
+;====================
+.386
+.model flat,stdcall
+option casemap:none
+
+    includelib C:\masm32\lib\kernel32.lib
+    includelib C:\masm32\lib\user32.lib
+
+    include C:\masm32\include\kernel32.inc
+    include C:\masm32\include\user32.inc
+    include C:\masm32\include\windows.inc
+
+.data
+    className db "className",0
+    appName db "Title box",0
+    tbao1 db "Day la thong bao",0
+.data?
+    hInstance   HINSTANCE   ?
+    CommandLine LPSTR       ?
+    wc          WNDCLASSEX <>
+    hwnd        dd          ?
+.const 
+    IDC_EDIT    equ 1001
+    IDC_BUTTON  equ 1002    
+.code
+    ;=================;
+    ;       TEST      ;
+    ;=================;
+
+    WndProc proc hWnd:HWND, uMsg:UINT, wParam:WPARAM, lParam:LPARAM
+       ret
+    WndProc endp
+start:
+
+    Invoke GetModuleHandle,NULL
+    mov [hInstance],eax
+
+
+    Invoke GetCommandLine
+    mov CommandLine,eax
+
+    mov [wc.cbSize], sizeof WNDCLASSEX
+    mov [wc.style],CS_VREDRAW or CS_HREDRAW
+    mov [wc.lpfnWndProc], offset WndProc
+    mov [wc.cbClsExtra],0
+    mov [wc.cbWndExtra],0
+    mov [wc.hInstance],eax
+    invoke LoadIcon, NULL, IDI_APPLICATION
+    mov [wc.hIcon], eax
+    mov [wc.hIconSm], eax
+    invoke LoadCursor, NULL, IDC_ARROW
+    mov [wc.hCursor], eax
+    mov [wc.hbrBackground], COLOR_WINDOW+1
+    mov [wc.lpszMenuName], NULL
+    mov [wc.lpszClassName], offset ClassName
+
+    ;==================
+    ; REGISTER CLASS  =
+    ;==================
+    ;dang ki class
+    Invoke RegisterClassA, addr wc
+
+
+    ;==================
+    ; CREATE WINDOWS  =
+    ;==================
+    Invoke CreateWindowEx, 0,
+        addr className,
+        addr appName,
+        WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, CW_USEDEFAULT, 300, 150,
+        NULL, NULL,
+        [hInstance], NULL
+    mov [hwnd], eax
+    invoke ShowWindow, [hwnd], SW_SHOW
+    invoke UpdateWindow, [hwnd]
+    ;==================
+    ;       EXIT      =
+    ;==================
+    invoke ExitProcess,0
+end start
